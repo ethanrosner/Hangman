@@ -1,2 +1,2 @@
 # Hangman
-hangman
+hangman a
