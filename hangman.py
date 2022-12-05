@@ -50,9 +50,17 @@ for char in genCountry:
         genCountryReplaced += "-"
 print(genCountryReplaced)
 
+genUnderWordShow = wordFont.render(genCountryReplaced, True, white)
+genUnderRect = genUnderWordShow.get_rect()
+genUnderRect.center = (X * 0.5, Y * 0.8)
+
+
+
 genWordShow = wordFont.render(genCountryReplaced, True, white)
 genRect = genWordShow.get_rect()
-genRect.center = (X * 0.5, Y * 0.8)
+genRect.center = (X * 0.5, Y * 0.79)
+
+
 
 # def playGame():
 
@@ -69,7 +77,11 @@ while True:
     # head holder line
     pygame.draw.line(screen, white, (X * 0.55, Y * 0.3), (X * 0.55, Y * 0.25), width=3)
 
+    # checking for word
+    
+
     # drawing word text
+    display_surface.blit(genUnderWordShow, genUnderRect)
     display_surface.blit(genWordShow, genRect)
 
     # in game drawing
