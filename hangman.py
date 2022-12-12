@@ -1,6 +1,8 @@
 import pygame
 import math
 import random
+from numpy import *
+
 
 pygame.init()
 
@@ -31,35 +33,50 @@ title = titleFont.render("Countries Hangman", True, white)
 titleRect = title.get_rect()
 titleRect.center = (X * 0.5, Y * 0.2)
 
+
 # def getWord():
-rSlotN = random.randrange(0,193)
-genCountry = wordBank[rSlotN]
-# genCountryL = len(genCountry)
-# print(genCountryL)
+rSlotN = random.randint(0, 193)
+genWord = wordBank[rSlotN]
+# genWordL = len(genWord)
+# print(genWordL)
 
-genCountryReplaced = ""
+genWordReplaced = ""
 
-print(genCountry)
+print(genWord)
 
-for char in genCountry:
+for char in genWord:
     if char != " " and char != "-":
-        genCountryReplaced += "_ "
+        genWordReplaced += "_ "
     elif char == " ":
-        genCountryReplaced += "  "
+        genWordReplaced += "  "
     elif char == "-":
-        genCountryReplaced += "-"
-print(genCountryReplaced)
+        genWordReplaced += "-"
+print(genWordReplaced)
 
-genUnderWordShow = wordFont.render(genCountryReplaced, True, white)
+genUnderWordShow = wordFont.render(genWordReplaced, True, white)
 genUnderRect = genUnderWordShow.get_rect()
 genUnderRect.center = (X * 0.5, Y * 0.8)
 
-
-
-genWordShow = wordFont.render(genCountryReplaced, True, white)
+genWordShow = wordFont.render(genWordReplaced, True, white)
 genRect = genWordShow.get_rect()
 genRect.center = (X * 0.5, Y * 0.79)
 
+# array of word to be guessed
+wordToGuess = array([[" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y],
+                     [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y],
+                     [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y],
+                     [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y],
+                     [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y],
+                     [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y],
+                     [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y],
+                     [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y], [" ", black, X, Y]], dtype=object)
+
+# enter letters and locations to array
+genLength = len(genWord)
+print(genLength)
+
+for x in range(genLength):
+    wordToGuess[x,0] = " "
 
 
 # def playGame():
@@ -78,7 +95,6 @@ while True:
     pygame.draw.line(screen, white, (X * 0.55, Y * 0.3), (X * 0.55, Y * 0.25), width=3)
 
     # checking for word
-    
 
     # drawing word text
     display_surface.blit(genUnderWordShow, genUnderRect)
@@ -103,8 +119,6 @@ while True:
     pygame.draw.circle(screen, white, (X * 0.565, Y * 0.33), (X * 0.005))
     # mouth
     pygame.draw.arc(screen, white, (X * 0.535, Y * 0.347, X * 0.03, Y * 0.01), 2 * math.pi, 1 * math.pi)
-
-
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
